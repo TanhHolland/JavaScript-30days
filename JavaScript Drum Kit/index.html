@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <div class="box-item" data-key="65">
+                    <span class="title">A</span>
+                    <span class="desc">Clapp</span>
+                </div>
+                <div class="box-item" data-key="83">
+                    <span class="title">S</span>
+                    <span class="desc">clapp</span>
+                </div>
+                <div class="box-item" data-key="68">
+                    <span class="title">D</span>
+                    <span class="desc">clapp</span>
+                </div>
+                <div class="box-item" data-key="70">
+                    <span class="title">F</span>
+                    <span class="desc">clapp</span>
+                </div>
+            </div>
+            <audio data-key="65">
+                <source src="./background-music-number-2-151403.mp3" />
+            </audio>
+            <audio data-key="83">
+                <source src="./epicmusicwav-6877.mp3" />
+            </audio>
+            <audio data-key="68">
+                <source src="./sad-soul-chasing-a-feeling-185750.mp3" />
+            </audio>
+            <audio data-key="70">
+                <source src="./warrior_30sec-192838.mp3" />
+            </audio>
+        </main>
+    </body>
+    <script>
+        var currentAudio = null;
+        window.addEventListener("keydown", (e) => {
+            if(currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            let audio = document.querySelector(
+                `audio[data-key="${e.keyCode}"]`
+            );
+            audio.play()
+            currentAudio = audio
+            let box = document.querySelector(
+                `.box-item[data-key="${e.keyCode}"]`
+            );
+            box.style.transform = "translateY(-50%) scale(1.2)";
+            box.style.transition = "0.25s";
+            box.addEventListener("transitionend", () => {
+                box.style.transform = "";
+            });
+        });
+    </script>
+</html>

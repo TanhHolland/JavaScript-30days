@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <div class="list__group">
+                    <label>Red</label>
+                    <input
+                        type="range"
+                        min="0"
+                        max="255"
+                        value="0"
+                        class="slider-red"
+                    />
+                    <label>Green</label>
+                    <input
+                        type="range"
+                        min="0"
+                        max="255"
+                        value="0"
+                        class="slider-green"
+                    />
+                    <label>Blue</label>
+                    <input
+                        type="range"
+                        min="0"
+                        max="255"
+                        value="0"
+                        class="slider-blue"
+                    />
+                </div>
+                <div class="result"></div>
+                <span class="desc-rgb"></span>
+            </div>
+        </main>
+    </body>
+    <script>
+        let sliderRed = document.querySelector(".slider-red");
+        let sliderBlue = document.querySelector(".slider-blue");
+        let sliderGreen = document.querySelector(".slider-green");
+        let result = document.querySelector(".result");
+        let rgb = document.querySelector('.desc-rgb');
+        let valueSliderRed = 0,
+            valueSliderBlue = 0,
+            valueSliderGreen = 0;
+        const displayRgb = () => {
+            rgb.innerHTML = `Red: ${valueSliderRed}, Green : ${valueSliderGreen}, Blue: ${valueSliderBlue}`;
+        }
+        sliderRed.addEventListener("input", (e) => {
+            valueSliderRed = e.target.value;
+            result.style.backgroundColor = `rgb(${valueSliderRed},${valueSliderGreen},${valueSliderBlue})`;
+            displayRgb();
+        });
+        sliderBlue.addEventListener("input", (e) => {
+            valueSliderBlue = e.target.value;
+            result.style.backgroundColor = `rgb(${valueSliderRed},${valueSliderGreen},${valueSliderBlue})`;
+            displayRgb();
+        });
+        sliderGreen.addEventListener("input", (e) => {
+            valueSliderGreen = e.target.value;
+            result.style.backgroundColor = `rgb(${valueSliderRed},${valueSliderGreen},${valueSliderBlue})`;
+            displayRgb();
+        });
+        result.style.backgroundColor = `rgb(${valueSliderRed},${valueSliderGreen},${valueSliderBlue})`;
+        displayRgb()
+    </script>
+</html>

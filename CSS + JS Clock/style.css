@@ -1,0 +1,33 @@
+main {
+    height: 100vh;
+    background-image: url(./back-ground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    min-width: 300px;
+    height: 300px;
+    border: 10px solid black;
+    border-radius: 999px;
+    position: relative;
+}
+.line {
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    top: 50%;
+    left: calc(50% - 120px);
+    transform-origin: 100% 100%;
+}
+.line__hour {
+    background-color: red;
+}
+.line__min {
+    background-color: blue;
+}
+.line__second {
+    background-color: green;
+}
