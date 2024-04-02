@@ -1,0 +1,18 @@
+.container {
+    width: 1170px;
+    max-width: calc(100% - 48px);
+    height: 100vh;
+    margin: 0 auto;
+}
+table, th, td {
+    border: 1px solid #333;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px 10px;
+    line-height: 1.28;
+}
+tr:hover {
+    cursor: pointer;
+    background-color: #ccc;
+}
