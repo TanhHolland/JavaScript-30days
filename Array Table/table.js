@@ -271,43 +271,65 @@ const database = {
 
 const DisplayTable = (positionDisplayTable) => {
     listData = database["books"];
-    let container = document.querySelector(positionDisplayTable);
     let table = document.createElement("table");
     let headerRow = document.createElement("tr");
 
-    const createTypeRow = (text, type, boolAlign) => {
+    const createDataRow = (text, type) => {
         let typeRow = document.createElement(type);
         let textContent = document.createTextNode(text);
         typeRow.appendChild(textContent);
-        if (boolAlign) {
-            typeRow.style.textAlign = "center";
-        }
         return typeRow;
     };
-    const SearchData = (columnSearchFeature) => {
-        let searchElement = document.querySelector(".search-fill");
-        searchElement.addEventListener("keyup", (e) => {
-            textDisplaySearch = e.target.value;
+    const CreateHeaderRow = () => {
+        ["id", "title", "author", "code", "status"].forEach((item) => {
+            headerRow.appendChild(createDataRow(item, "th"));
+        });
+        table.appendChild(headerRow);
+    };
+    const CreateBodyRow = () => {
+        listData.forEach((itemRow) => {
+            let tr = document.createElement("tr");
+            ["id", "title", "author", "code", "status"].forEach((item) => {
+                tr.appendChild(createDataRow(itemRow[item], "td"));
+            });
+            table.appendChild(tr);
         });
     };
-    ["id", "title", "author", "code", "status"].forEach((item) => {
-        headerRow.appendChild(createTypeRow(item, "th"));
-    });
-    table.appendChild(headerRow);
-
-    listData.forEach((itemRow) => {
-        let tr = document.createElement("tr");
-        ["id", "title", "author", "code", "status"].forEach((item) => {
-            if (item === "id") {
-                tr.appendChild(createTypeRow(itemRow[item], "td", true));
-            } else {
-                tr.appendChild(createTypeRow(itemRow[item], "td", false));
+    const InputData = positionDisplayTable => {
+        let container = document.querySelector(positionDisplayTable);
+        container.appendChild(table);
+    }
+    const SearchData = () => {
+        let searchElement = document.querySelector(".search-fill");
+        let rows = table.children; // tr
+        searchElement.addEventListener("keyup", (e) => {
+            textDisplaySearch = e.target.value.toLowerCase();
+            if (textDisplaySearch === "") {
+                for (let i = 0; i < rows.length; i++) {
+                    rows[i].style.display = "";
+                }
+                return;
+            }
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].children; // td
+                let check = false;
+                let cellText = cells[1].textContent.toLowerCase(); // tìm theo title
+                textDisplaySearch.toLowerCase();
+                if (cellText.indexOf(textDisplaySearch) > -1) {
+                    check = true;
+                }
+                if (!check) {
+                    rows[i].style.display = "none";
+                } else {
+                    rows[i].style.display = "";
+                }
             }
         });
-        table.appendChild(tr);
-    });
-    console.log(table);
-    container.appendChild(table);
+    };
+    CreateHeaderRow();
+    CreateBodyRow();
+    InputData(positionDisplayTable);
+    SearchData();
 };
 
 DisplayTable(".container");
