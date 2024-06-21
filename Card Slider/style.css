@@ -1,0 +1,32 @@
+body {
+    background-color: #343F50;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.box {
+    width: 800px;
+    height: 500px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 14px;
+}
+img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;    
+}
+.images {
+    display: flex;
+}
+button {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    position: absolute;
+}

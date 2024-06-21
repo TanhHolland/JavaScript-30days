@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="box">
+                <div class="search">
+                    <input type="text" name="input" id="" class="input" />
+                    <button type="submit" class="submit">Search</button>
+                </div>
+                <div class="img">
+                    <img src="./images.png" alt="" class="icon" />
+                </div>
+                <span class="temp"></span>
+                <span class="city"></span>
+                <div class="desc">
+                    <div class="item">
+                        <span>Humidity:</span>
+                        <span class="humidity"></span>
+                    </div>
+                    <div class="item">
+                        <span>Wind:</span>
+                        <span class="wind"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const apiKey = "677b1ce1ac7ee29a76efbcc8f9ff1ddd";
+        let submit = document.querySelector(".submit");
+        async function getWeather() {
+            let nameCity = document.querySelector(".input").value;
+            let apiWeather = `https://api.openweathermap.org/data/2.5/weather?q=${nameCity}&appid=${apiKey}`;
+            const resWeather = await fetch(apiWeather);
+            const dataWeather = await resWeather.json();
+            console.log(dataWeather);
+            let city = document.querySelector(".city");
+            let temp = document.querySelector(".temp");
+            let wind = document.querySelector(".wind");
+            let humidity = document.querySelector(".humidity");
+            if (dataWeather.message) {
+                city.innerHTML = "Not city";
+                temp.innerHTML = "";
+                humidity.innerHTML = "";
+                wind.innerHTML = "";
+                return;
+            }
+            city.innerHTML = dataWeather.name;
+            temp.innerHTML = Math.round(dataWeather.main.temp - 273.15) + "ºC";
+            document.querySelector(".humidity").innerHTML =
+                dataWeather.main.humidity + "%";
+            wind.innerHTML = dataWeather.wind.speed + " km/h";
+        }
+        submit.addEventListener("click", (event) => {
+            getWeather();
+        });
+    </script>
+</html>

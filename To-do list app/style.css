@@ -1,0 +1,84 @@
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box {
+    width: 700px;
+    background-color: #faaca8;
+    background-image: linear-gradient(19deg, #faaca8 0%, #ddd6f3 100%);
+    border-radius: 8px;
+    padding-bottom: 30px;
+}
+.todo {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.title {
+    font-size: 30px;
+    font-weight: 600;
+}
+.icon {
+    width: 36px;
+    margin-left: 15px;
+}
+.row {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #edeef0;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    background: transparent;
+    font-size: 20px;
+    font-style: italic;
+}
+.submit {
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 20px 50px;
+    border-radius: 30px;
+    background-color: #fbda61;
+    background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
+    cursor: pointer;
+}
+.list__todo {
+    margin-top: 30px;
+}
+.item {
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 20px;
+}
+.item svg {
+    width: 24px;
+}
+.title-todo {
+    font-size: 24px;
+    margin-left: 10px;
+}
+.check {
+    color: #fff;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+}
+.xmark {
+    margin-left: auto;
+    cursor: pointer;
+}
