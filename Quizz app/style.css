@@ -1,0 +1,22 @@
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box {
+    width: 400px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+}
+.choice {
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+.choice:hover {
+    cursor: pointer;
+}

@@ -72,10 +72,8 @@
     font-size: 24px;
     margin-left: 10px;
 }
-.check {
-    color: #fff;
-    overflow: hidden;
-    border: none;
+.icon_list {
+    width: 24px;
     cursor: pointer;
 }
 .xmark {
