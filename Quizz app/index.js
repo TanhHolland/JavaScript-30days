@@ -45,9 +45,11 @@ const data = [
 const listDisplay = document.querySelector(".list");
 const next = document.querySelector(".next");
 const left = document.querySelector(".left");
-let isDone = false;
 let posPage = 0;
+let score = 0;
 function DisplayQuestions(index) {
+    // Remove question
+    listDisplay.innerHTML = "";
     // Title question
     let ques = document.createElement("h3");
     ques.className = "question";
@@ -58,62 +60,47 @@ function DisplayQuestions(index) {
         let choice = document.createElement("h4");
         choice.className = "choice";
         choice.innerHTML = data[index].answers[i].text;
+        choice.addEventListener("click", () => CheckAnswers(i, index));
         listDisplay.appendChild(choice);
     }
-    CheckAnswers(index);
 }
-function RemoveQuestions() {
-    listDisplay.innerHTML = '';
-    console.log('remove');
+function DisplayScore() {
+    listDisplay.innerHTML = "";
+    let item = document.createElement("h3");
+    item.innerHTML = `Your score ${score} / ${data.length}`;
+    listDisplay.appendChild(item);
 }
-function CheckAnswers(index) {
-    let choicesDisplay = listDisplay.children;
-    console.log(choicesDisplay);
-    for(let i = 1; i < choicesDisplay.length; i++) {
-        choicesDisplay[i].addEventListener('click',(e) => {
-            
-        })
-    }
-    listDisplay.addEventListener("click", (e) => {
-        if (e.target.className !== "choice" || isDone) return;
-        let answerByUser = e.target.innerText;
-        let choices = data[index].answers;
-        let choicesDisplay = listDisplay.children;
-        let posAnswerTrue, posAnswerUser;
-        for (let i = 0; i < choices.length; i++) {
-            if (choices[i].correct) {
-                posAnswerTrue = i;
-            }
-            if (choices[i].text === answerByUser) {
-                posAnswerUser = i;
-            }
-        }
-        if (posAnswerTrue === posAnswerUser) {
-            choicesDisplay[posAnswerTrue + 1].style.backgroundColor = "green";
-        } else {
-            choicesDisplay[posAnswerTrue + 1].style.backgroundColor = "green";
-            choicesDisplay[posAnswerUser + 1].style.backgroundColor = "red";
-        }
-        console.log(choicesDisplay[posAnswerTrue + 1]);
-        console.log(choicesDisplay[posAnswerUser + 1]);
-        isDone = true;
+function CheckAnswers(selectUserIndex, selectCurrentPage) {
+    let allAnswers = document.querySelectorAll(".choice");
+    allAnswers.forEach((item) => {
+        item.style.pointerEvents = "none";
     });
+
+    let indexCorrect = data[selectCurrentPage].answers.findIndex((item) => {
+        return item.correct === true;
+    });
+    if (selectUserIndex === indexCorrect) {
+        allAnswers[selectUserIndex].style.backgroundColor = "green";
+        score++;
+    } else {
+        allAnswers[selectUserIndex].style.backgroundColor = "red";
+        allAnswers[indexCorrect].style.backgroundColor = "green";
+    }
 }
 function DirectionPage() {
     DisplayQuestions(posPage);
     left.addEventListener("click", (e) => {
         if (posPage === 0) return;
-        RemoveQuestions();
         posPage -= 1;
-        isDone = false;
         DisplayQuestions(posPage);
     });
     next.addEventListener("click", (e) => {
-        if (posPage == data.length) return;
-        RemoveQuestions();
-        posPage += 1;
-        isDone = false;
-        DisplayQuestions(posPage);
+        if (posPage === data.length - 1) {
+            DisplayScore();
+        } else {
+            posPage += 1;
+            DisplayQuestions(posPage);
+        }
     });
 }
 DirectionPage();
