@@ -1,0 +1,8 @@
+.container {
+    padding-top: 100px;
+    padding-left: 100px;
+}
+.result {
+    display: flex;
+    gap: 20px;
+}
